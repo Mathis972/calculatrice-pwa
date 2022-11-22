@@ -47,7 +47,7 @@ const Calculator = () => {
     } else {
       setCurrNumber(currNumber + lastClicked);
     }
-  }, [lastClicked]);
+  }, [lastClicked, currNumber, prevNumber, prevOperator]);
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
