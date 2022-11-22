@@ -35,6 +35,7 @@ const Calculator = () => {
           parseInt(currNumber)
         ).toString()
       );
+      setLastClicked('');
     } else if (lastClicked === 'C') {
       setPrevNumber('');
       setPrevOperator('');
@@ -42,18 +43,17 @@ const Calculator = () => {
       setLastClicked('');
     } else if (operators.includes(lastClicked)) {
       setPrevOperator(lastClicked);
-      setPrevNumber(currNumber);
+      if (currNumber) {
+        setPrevNumber(currNumber);
+      }
       setCurrNumber('');
-    } else {
+    } else if (currNumber !== lastClicked) {
       setCurrNumber(currNumber + lastClicked);
     }
-  }, [lastClicked, currNumber, prevNumber, prevOperator]);
+  }, [lastClicked, prevNumber, prevOperator, currNumber]);
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
-      console.log('User pressed: ', event.key);
-      console.log(event.key);
-
       if (event.key === 'Enter') {
         event.preventDefault();
         setLastClicked('=');
